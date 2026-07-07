@@ -1,0 +1,70 @@
+src/
+│
+├── app/
+│   │
+│   ├── layout/
+│   │   ├── header/
+│   │   │   ├── header.html
+│   │   │   ├── header.scss
+│   │   │   └── header.ts
+│   │   │
+│   │   └── footer/
+│   │
+│   ├── pages/
+│   │   └── home/
+│   │       ├── home.html
+│   │       ├── home.scss
+│   │       └── home.ts
+│   │
+│   ├── sections/
+│   │   ├── navbar/
+│   │   │   ├── navbar.html
+│   │   │   ├── navbar.scss
+│   │   │   └── navbar.ts
+│   │   │
+│   │   ├── hero/
+│   │   │   ├── hero.html
+│   │   │   ├── hero.scss
+│   │   │   └── hero.ts
+│   │   │
+│   │   └── highlights/
+│   │       ├── highlights.html
+│   │       ├── highlights.scss
+│   │       └── highlights.ts
+│   │
+│   ├── app.config.server.ts
+│   ├── app.config.ts
+│   ├── app.html
+│   ├── app.routes.server.ts
+│   ├── app.routes.ts
+│   ├── app.scss
+│   └── app.ts
+│
+├── assets/
+│   ├── images/
+│   │   ├── logo/
+│   │   ├── hero/
+│   │   └── icons/
+│   │
+│   └── data/
+│       ├── hero.json
+│       └── highlights.json
+│
+├── styles/
+│   │
+│   ├── abstracts/
+│   │   ├── _colors.scss
+│   │   ├── _fonts.scss
+│   │   ├── _variables.scss
+│   │   ├── _mixins.scss
+│   │   └── _animations.scss
+│   │
+│   ├── base/
+│   │   ├── _common.scss
+│   │   ├── _utilities.scss
+│   │   └── _typography.scss
+│   │
+│   └── styles.scss
+│
+├── index.html
+└── main.ts
