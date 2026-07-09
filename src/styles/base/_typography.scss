@@ -1,0 +1,27 @@
+@use "../core/colors" as *;
+@use "../core/fonts" as *;
+
+body {
+    font-family: $font-body;
+    font-size: 16px;
+    font-weight: $fw-400;
+    color: $text-primary;
+    background: $background;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-heading;
+    font-weight: $fw-600;
+    color: $text-primary;
+    line-height: 1.2;
+}
+
+p {
+    margin-bottom: 0;
+}

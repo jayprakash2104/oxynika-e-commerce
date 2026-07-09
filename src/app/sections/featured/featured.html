@@ -1,0 +1,177 @@
+<section class="featured">
+
+    <div class="container">
+
+        <!-- Section Header -->
+
+        <div class="section-header">
+
+            <div class="section-title-wrapper">
+
+                <span class="section-tag">
+                    OUR COLLECTION
+                </span>
+
+                <h2 class="section-title">
+                    Featured Products
+                </h2>
+
+                <p class="section-description">
+                    Discover our premium wellness essentials crafted to support your everyday lifestyle.
+                </p>
+
+            </div>
+
+            <div class="slider-navigation">
+
+                <button
+                    id="featured-prev"
+                    class="slider-btn"
+                    type="button">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                </button>
+
+                <button
+                    id="featured-next"
+                    class="slider-btn"
+                    type="button">
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Category Tabs -->
+
+        <div class="category-wrapper">
+
+            <div class="category-tabs">
+
+                @for (tab of collectionTabs; track tab.id) {
+
+                    <button
+                        type="button"
+                        class="category-tab"
+                        [class.active]="selectedTab.id === tab.id"
+                        (click)="selectTab(tab)">
+
+                        {{ tab.title }}
+
+                    </button>
+
+                }
+
+            </div>
+
+        </div>
+
+        <!-- Products Slider -->
+
+        <div class="products-slider">
+
+            <swiper-container
+                #productSwiper
+                class="featured-swiper"
+                navigation-next-el="#featured-next"
+                navigation-prev-el="#featured-prev"
+                pagination="false"
+                loop="false"
+                speed="600"
+                slides-per-view="4"
+                space-between="24"
+                breakpoints='{
+                    "0":{"slidesPerView":1.2,"spaceBetween":16},
+                    "576":{"slidesPerView":2.2,"spaceBetween":16},
+                    "768":{"slidesPerView":2.2,"spaceBetween":16},
+                    "992":{"slidesPerView":3,"spaceBetween":16},
+                    "1200":{"slidesPerView":4,"spaceBetween":16}
+                }'>
+
+                @for (product of selectedTab.products; track product.id) {
+
+                    <swiper-slide>
+
+                        <article class="product-card">
+
+                            @if (product.badge) {
+
+                                <span class="product-badge">
+
+                                    {{ product.badge }}
+
+                                </span>
+
+                            }
+
+                            <div class="product-rating">
+
+                                <i class="bi bi-star-fill"></i>
+
+                                <span>
+
+                                    {{ product.rating }}
+
+                                </span>
+
+                            </div>
+
+                            <div class="product-image">
+
+                                <img
+                                    [src]="product.image"
+                                    [alt]="product.name">
+
+                            </div>
+
+                            <div class="product-content">
+
+                                <h3 class="product-title">
+
+                                    {{ product.name }}
+
+                                </h3>
+
+                                <div class="price-wrapper">
+
+                                    <span class="price">
+
+                                        ₹{{ product.price }}
+
+                                    </span>
+
+                                    <span class="original-price">
+
+                                        ₹{{ product.originalPrice }}
+
+                                    </span>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="product-btn">
+
+                                    Add To Cart
+
+                                </button>
+
+                            </div>
+
+                        </article>
+
+                    </swiper-slide>
+
+                }
+
+            </swiper-container>
+
+        </div>
+
+    </div>
+
+</section>

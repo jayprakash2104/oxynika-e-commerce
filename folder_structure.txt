@@ -63,6 +63,7 @@ src/
 │   │   ├── _common.scss
 │   │   ├── _utilities.scss
 │   │   └── _typography.scss
+|   |   └── _reset.scss    
 │   │
 │   └── styles.scss
 │

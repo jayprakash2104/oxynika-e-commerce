@@ -1,0 +1,101 @@
+@use "../../../styles/core/colors" as *;
+@use "../../../styles/core/fonts" as *;
+@use "../../../styles/core/variables" as *;
+@use "../../../styles/core/mixins" as *;
+
+.custom-navbar {
+    background: $white;
+    border-bottom: 1px solid $border;
+    height: 100px;
+
+    .navbar-brand img {
+        height: 72px;
+        width: auto;
+    }
+
+    .navbar-nav {
+        gap: 40px;
+    }
+
+    .nav-link {
+        color: $text-primary;
+        font-family: $font-body;
+        font-size: 15px;
+        font-weight: $fw-600;
+        padding: 0;
+        transition: $transition;
+
+        &:hover,
+        &.active {
+            color: $primary;
+        }
+    }
+
+    .navbar-actions {
+        @include flex-center;
+        gap: 16px;
+    }
+
+    .icon-btn {
+        @include flex-center;
+
+        width: 42px;
+        height: 42px;
+
+        border: 1px solid $border;
+        border-radius: $radius-round;
+
+        background: $white;
+        color: $text-primary;
+
+        transition: $transition;
+        position: relative;
+
+        .cart-count {
+            @include flex-center;
+            position: absolute;
+            top: -6px;
+            right: -4px;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 4px;
+            border-radius: 80px;
+            background: $primary;
+            color: $white;
+            font-size: 10px;
+            font-weight: $fw-700;
+            line-height: 2;
+            pointer-events: none;
+        }
+
+        &:hover {
+            background: $primary-light;
+            color: $primary;
+            border-color: $primary;
+        }
+
+        i {
+            font-size: 18px;
+        }
+    }
+
+    .navbar-toggler {
+        border: none;
+        box-shadow: none;
+        // background: transparent;
+        padding: 0;
+        i {
+            font-size: 28px;
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 991.98px) {
+        height: 82px;
+        .navbar-brand img {
+            height: 56px;
+        }
+
+    }
+}
+

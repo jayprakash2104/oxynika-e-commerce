@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
+import { Header } from '../../layout/header/header';
+import { Navbar } from "../../sections/navbar/navbar";
+import { Hero } from "../../sections/hero/hero";
+import { Highlights } from "../../sections/highlights/highlights";
+import { Featured } from "../../sections/featured/featured";
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  standalone: true,
+  imports: [Header, Navbar, Hero, Highlights, Featured],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

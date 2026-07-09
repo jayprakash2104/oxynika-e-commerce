@@ -1,0 +1,167 @@
+@use "../../../styles/core/colors" as *;
+@use "../../../styles/core/fonts" as *;
+@use "../../../styles/core/variables" as *;
+@use "../../../styles/core/mixins" as *;
+
+.highlights {
+    margin-top: 10px;
+    margin-bottom: 60px;
+
+    .highlights-wrapper {
+        background: $white;
+        border: 1px solid $border;
+        border-radius: $radius-xl;
+        box-shadow: $shadow-sm;
+        overflow: hidden;
+    }
+
+    .highlight-item {
+        @include flex-center;
+
+        gap: 18px;
+        padding: 28px 24px;
+        position: relative;
+        height: 100%;
+        transition: $transition;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 70px;
+            background: $border;
+        }
+
+        &:hover {
+
+            .highlight-icon {
+                background: $primary;
+
+                i {
+                    color: $white;
+                }
+            }
+
+            h4 {
+                color: $primary;
+            }
+        }
+    }
+
+    .highlight-icon {
+        @include flex-center;
+
+        width: 70px;
+        height: 70px;
+
+        flex-shrink: 0;
+
+        border-radius: 50%;
+
+        background: $primary-light;
+
+        transition: $transition;
+
+        i {
+            font-size: 30px;
+            color: $primary;
+            transition: $transition;
+        }
+    }
+
+    .highlight-content {
+
+        h4 {
+            margin-bottom: 6px;
+
+            font-family: $font-body;
+            font-size: 20px;
+            font-weight: $fw-700;
+            color: $text-primary;
+            transition: $transition;
+        }
+
+        p {
+            margin: 0;
+
+            font-size: 15px;
+            color: $text-secondary;
+            line-height: 1.6;
+        }
+    }
+
+    .col-lg-3:last-child {
+
+        .highlight-item::after {
+            display: none;
+        }
+
+    }
+}
+
+/* =========================
+        Tablet
+========================= */
+
+@media (max-width: 991.98px) {
+
+    .highlights {
+
+        .highlight-item {
+
+            justify-content: flex-start;
+            padding: 24px;
+
+            &::after {
+                display: none;
+            }
+        }
+
+    }
+
+}
+
+/* =========================
+        Mobile
+========================= */
+
+@media (max-width: 575.98px) {
+
+    .highlights {
+
+        margin-bottom: 40px;
+
+        .highlight-item {
+            flex-direction: column;
+            text-align: center;
+            gap: 16px;
+            padding: 24px 20px;
+        }
+
+        .highlight-icon {
+            width: 64px;
+            height: 64px;
+
+            i {
+                font-size: 28px;
+            }
+        }
+
+        .highlight-content {
+
+            h4 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+        }
+
+    }
+
+}

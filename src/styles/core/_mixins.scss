@@ -1,0 +1,80 @@
+@use "./variables" as *;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-start {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@mixin transition($property: all) {
+    transition: $property .3s ease;
+}
+
+/* ==========================================
+        Premium Fill Hover Effect
+========================================== */
+
+@mixin hover-fill(
+    $bg-color,
+    $hover-bg,
+    $text-color,
+    $hover-text,
+    $border-color: $bg-color
+) {
+
+    position: relative;
+    overflow: hidden;
+
+    background: $bg-color;
+    color: $text-color;
+
+    border: 1px solid $border-color;
+
+    transition: $transition;
+
+    &::before {
+
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        background: $hover-bg;
+
+        clip-path: circle(0% at 50% 100%);
+
+        transition: clip-path 0.55s cubic-bezier(0.39, 0.58, 0.57, 1);
+
+        z-index: -1;
+    }
+
+    &:hover {
+
+        color: $hover-text;
+
+        border-color: $hover-bg;
+
+        &::before{
+            clip-path: circle(160% at 50% 100%);
+        }
+
+    }
+
+}

@@ -1,0 +1,17 @@
+@use "bootstrap/scss/bootstrap";
+@use "swiper/css/bundle";
+
+// Abstracts
+@use "./core/colors";
+@use "./core/fonts";
+@use "./core/variables";
+@use "./core/mixins";
+@use "./core/animations";
+
+// Base
+@use "./base/reset";
+@use "./base/typography";
+@use "./base/common";
+@use "./base/utilities";
+
+@import "bootstrap-icons/font/bootstrap-icons.css";

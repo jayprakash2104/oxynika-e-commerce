@@ -1,0 +1,131 @@
+@use "../../../styles/core/colors" as *;
+@use "../../../styles/core/variables" as *;
+@use "../../../styles/core/mixins" as *;
+
+.hero {
+
+    padding: 24px 0 40px;
+    background: $background;
+
+    .hero-slider {
+
+        overflow: hidden;
+        border-radius: $radius-xl;
+        box-shadow: $shadow-lg;
+
+        swiper-container {
+
+            width: 100%;
+            height: 100%;
+        }
+
+        swiper-slide {
+
+            display: block;
+        }
+
+        img {
+
+            width: 100%;
+            height: 480px;
+            display: block;
+            object-fit: cover;
+        }
+
+    }
+
+}
+
+/* ------------------------------
+        Swiper Navigation
+--------------------------------*/
+
+.hero-slider::part(button-prev),
+.hero-slider::part(button-next) {
+
+    width: 48px;
+    height: 48px;
+
+    background: rgba(255,255,255,.95);
+
+    border-radius: 50%;
+
+    box-shadow: $shadow-md;
+
+    transition: $transition;
+}
+
+.hero-slider::part(button-prev):hover,
+.hero-slider::part(button-next):hover {
+
+    background: $white;
+}
+
+/* ------------------------------
+        Pagination
+--------------------------------*/
+
+.hero-slider::part(pagination) {
+
+    bottom: 18px;
+}
+
+.hero-slider::part(bullet) {
+
+    width: 10px;
+    height: 10px;
+
+    opacity: 1;
+
+    background: rgba(255,255,255,.55);
+
+    margin: 0 5px;
+}
+
+.hero-slider::part(bullet-active) {
+
+    width: 34px;
+
+    border-radius: 50px;
+
+    background: $primary;
+}
+
+/* ------------------------------
+        Tablet
+--------------------------------*/
+
+@media (max-width:991.98px){
+
+    .hero{
+
+        padding:20px 0 30px;
+
+    }
+
+}
+
+/* ------------------------------
+        Mobile
+--------------------------------*/
+
+@media (max-width:575.98px){
+
+    .hero{
+
+        padding:16px 0 24px;
+
+        .hero-slider{
+
+            border-radius:$radius-lg;
+
+            img{
+
+                height:480px;
+            }
+
+        }
+
+    }
+
+}

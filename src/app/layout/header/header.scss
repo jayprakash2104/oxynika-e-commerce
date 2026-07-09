@@ -1,0 +1,46 @@
+@use "../../../styles/core/colors" as *;
+@use "../../../styles/core/fonts" as *;
+@use "../../../styles/core/variables" as *;
+@use "../../../styles/core/mixins" as *;
+
+.top-header {
+    background: $background-light;
+    border-bottom: 1px solid $border;
+    font-family: $font-body;
+    font-size: 13px;
+    font-weight: $fw-500;
+    color: $text-secondary;
+}
+
+.top-header .container {
+    height: 42px;
+
+}
+
+.header-item {
+    @include flex-center;
+    font-size: 13px;
+    font-weight: $fw-500;
+    i{
+        color: $primary-dark;
+    }
+}
+
+.header-item {
+    gap: 8px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 991.98px) {
+
+    .top-header .container {
+        height: 36px;
+    }
+
+    .header-item {
+        font-size: 12px;
+    }
+
+}
