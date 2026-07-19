@@ -3,48 +3,6 @@
 @use '../../../styles/core/variables' as *;
 @use '../../../styles/core/mixins' as *;
 
-.testimonials-section {
-    overflow: hidden;
-}
-
-.testimonials-section .section-heading {
-    max-width: 720px;
-    margin: 0 auto;
-}
-
-.testimonials-section .section-tag {
-    display: inline-flex;
-    align-items:
-        center;
-    padding: .65rem 1.4rem;
-    border-radius: $radius-round;
-    background: $primary-light;
-    color: $text-primary;
-    font-family:
-        $font-body;
-    font-weight: $fw-600;
-    margin-bottom: 1rem;
-}
-
-.testimonials-section h2 {
-    font-family: $font-heading;
-    font-weight:
-        $fw-700;
-    color: $text-primary;
-    margin-bottom: 1rem;
-}
-
-.testimonials-section h2 span {
-    color: $primary;
-}
-
-.testimonials-section p {
-    color: $text-secondary;
-    font-family:
-        $font-body;
-    line-height: 1.8;
-}
-
 @keyframes marqueeLeft {
     from {
         transform: translateX(0);
@@ -65,204 +23,199 @@
     }
 }
 
-.testimonial-row {
-    position: relative;
+.testimonials-section {
     overflow: hidden;
-    width: 100%;
-}
 
-.testimonial-row::before,
-.testimonial-row::after {
-    content: ““;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 140px;
-    z-index: 5;
-    pointer-events: none;
-}
+    .testimonial-row {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
 
-.testimonial-row::before {
-    left: 0;
-    background: linear-gradient((to right, $background-light, 0) 100%);
-}
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 140px;
+            z-index: 5;
+            pointer-events: none;
 
-.testimonial-row::after {
-    right: 0;
-    background: linear-gradient((to left, $background-light, 0) 100%);
-}
+            @media (max-width: 991px) {
+                width: 90px;
+            }
 
-.testimonial-track {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 4rem;
-    width: max-content;
-    will-change: transform;
-}
+            @media (max-width: 767px) {
+                width: 50px;
+            }
+        }
 
-.marquee-left .testimonial-track {
-    animation: marqueeLeft 55s linear infinite;
-}
+        &::before {
+            left: 0;
+            background: linear-gradient(to right, $white, transparent);
+        }
 
-.marquee-right .testimonial-track {
-    animation: marqueeRight 55s linear infinite;
-}
+        &::after {
+            right: 0;
+            background: linear-gradient(to left, $white, transparent);
+        }
 
-.testimonial-row:hover .testimonial-track {
-    animation-play-state: paused;
-}
-
-.testimonial-card {
-    position: relative;
-    width: clamp(300px, 32vw, 480px);
-    padding: 1rem 1.5rem 1rem 4.5rem;
-    background: $white;
-    border: 1px solid $border;
-    border-radius: $radius-xl;
-    box-shadow: $shadow-sm;
-    flex-shrink: 0;
-    cursor: pointer;
-    @include transition();
-}
-
-.testimonial-card:hover {
-    transform: translateY(-8px);
-    box-shadow: $shadow-lg;
-}
-
-.customer-image {
-    position: absolute;
-    left: -40px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 96px;
-    height: 96px;
-    border-radius: $radius-round;
-    overflow: hidden;
-    border: 4px solid white;
-    box-shadow: $shadow-md;
-}
-
-.customer-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.testimonial-content {
-    position: relative;
-}
-
-.quote-icon {
-    position: absolute;
-    top: -.5rem;
-    right: 0;
-    font-size: 3rem;
-    opacity: .08;
-    color: $primary;
-}
-
-.rating {
-    display: flex;
-    gap: .25rem;
-    color: $secondary;
-    margin-bottom: 1rem;
-}
-
-.review {
-    font-family: $font-body;
-    color: $text-primary;
-    margin-bottom: 1.25rem;
-}
-
-.customer-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: .35rem;
-}
-
-.customer-info h5 {
-    margin: 0;
-    font-family: $font-heading;
-    font-weight: $fw-700;
-    color: $text-primary;
-}
-
-.verified {
-    display: flex;
-    align-items: center;
-    gap: .35rem;
-    color: $success;
-    font-size: .85rem;
-    font-family: $font-body;
-    font-weight: $fw-600;
-}
-
-.product-name {
-    color: $text-secondary;
-    font-size: .9rem;
-    font-family: $font-body;
-}
-
-@media (max-width:991px) {
-    .testimonial-track {
-        gap: 3rem;
+        &:hover .testimonial-track {
+            animation-play-state: paused;
+        }
     }
 
-    .testimonial-row::before,
-    .testimonial-row::after {
-        width: 90px;
+    .testimonial-track {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 4rem;
+        width: max-content;
+        will-change: transform;
+
+        @media (max-width: 991px) {
+            gap: 3rem;
+        }
+
+        @media (max-width: 767px) {
+            gap: 1.5rem;
+        }
+    }
+
+    .marquee-left .testimonial-track {
+        animation: marqueeLeft 55s linear infinite;
+    }
+
+    .marquee-right .testimonial-track {
+        animation: marqueeRight 55s linear infinite;
     }
 
     .testimonial-card {
-        width: 380px;
-    }
-}
+        position: relative;
+        width: clamp(300px, 32vw, 480px);
+        padding: 1rem 1.5rem 1rem 4.5rem;
+        background: $white;
+        border: 1px solid $border;
+        border-radius: $radius-xl;
+        box-shadow: $shadow-sm;
+        flex-shrink: 0;
+        cursor: pointer;
+        @include transition();
 
-@media (max-width:767px) {
-    .testimonial-track {
-        gap: 1.5rem;
-    }
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: $shadow-lg;
+        }
 
-    .testimonial-row::before,
-    .testimonial-row::after {
-        width: 50px;
-    }
+        @media (max-width: 991px) {
+            width: 380px;
+        }
 
-    .testimonial-card {
-        width: 280px;
-        padding: 1rem;
+        @media (max-width: 767px) {
+            width: 280px;
+            padding: 1rem;
+        }
     }
 
     .customer-image {
+        position: absolute;
+        left: -40px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 96px;
+        height: 96px;
+        border-radius: $radius-round;
+        overflow: hidden;
+        border: 4px solid white;
+        box-shadow: $shadow-md;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media (max-width: 767px) {
+            position: relative;
+            left: 0;
+            top: 0;
+            transform: none;
+            width: 72px;
+            height: 72px;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .testimonial-content {
         position: relative;
-        left: 0;
-        top: 0;
-        transform: none;
-
-        width: 72px;
-        height: 72px;
-
-        margin-bottom: 1rem;
-
-    }
-
-    .review {
-        font-size: .9rem;
-        line-height: 1.6;
-    }
-
-    .customer-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: .25rem;
     }
 
     .quote-icon {
-        font-size: 2.5rem;
+        position: absolute;
+        top: -.5rem;
+        right: 0;
+        font-size: 3rem;
+        opacity: .08;
+        color: $primary;
+
+        @media (max-width: 767px) {
+            font-size: 2.5rem;
+        }
+    }
+
+    .rating {
+        display: flex;
+        gap: .25rem;
+        color: $secondary;
+        margin-bottom: 1rem;
+    }
+
+    .review {
+        font-family: $font-body;
+        color: $text-primary;
+        margin-bottom: 1.25rem;
+
+        @media (max-width: 767px) {
+            font-size: .9rem;
+            line-height: 1.6;
+        }
+    }
+
+    .customer-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: .35rem;
+
+        h5 {
+            margin: 0;
+            font-family: $font-heading;
+            font-weight: $fw-700;
+            color: $text-primary;
+        }
+
+        @media (max-width: 767px) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: .25rem;
+        }
+    }
+
+    .verified {
+        display: flex;
+        align-items: center;
+        gap: .35rem;
+        color: $success;
+        font-size: .85rem;
+        font-family: $font-body;
+        font-weight: $fw-600;
+    }
+
+    .product-name {
+        color: $text-secondary;
+        font-size: .9rem;
+        font-family: $font-body;
     }
 }

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { SectionHeading } from "../../shared/section-heading/section-heading";
 
 interface Testimonial {
   id: number;
@@ -12,7 +13,7 @@ interface Testimonial {
 @Component({
   selector: 'app-testimonials', 
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,SectionHeading],
   templateUrl: './testimonials.html',
   styleUrl: './testimonials.scss',
 })
@@ -22,6 +23,13 @@ export class Testimonials {
 
   @ViewChild('bottomRow', { static: true })
   bottomRow!: ElementRef<HTMLDivElement>;
+
+  headingSegments: any = [
+    { text: 'Real Stories. ' },
+    { text: 'Real Results.', highlight: true }
+  ];
+
+  headingDescription : string = "Thousands of customers trust Oxynika Wellness in their everyday wellness journey.";
 
   readonly topTestimonials: Testimonial[] = [
 

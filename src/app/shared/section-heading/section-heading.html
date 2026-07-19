@@ -1,0 +1,25 @@
+<div class="section-heading text-center">
+
+    @if (tag()) {
+    <span class="section-tag">
+        {{ tag() }}
+    </span>
+    }
+
+    <h2 [class]="headingClass()">
+        @for (segment of heading(); track $index) {
+        @if (segment.highlight) {
+        <span>{{ segment.text }}</span>
+        } @else {
+        {{ segment.text }}
+        }
+        }
+    </h2>
+
+    @if (description()) {
+    <p>
+        {{ description() }}
+    </p>
+    }
+
+</div>
