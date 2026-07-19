@@ -1,0 +1,174 @@
+<section class="testimonials-section container py-5">
+
+    <div class="container">
+
+        <!-- Section Heading -->
+
+        <div class="section-heading text-center mb-5">
+
+            <span class="section-tag">
+                Loved by Our Community
+            </span>
+
+            <h2>
+                Real Stories.
+                <span>Real Results.</span>
+            </h2>
+
+            <p>
+                Thousands of customers trust Oxynika Wellness in their everyday wellness journey.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Marquee Row 01 -->
+    <!-- ========================= -->
+
+    <div
+        class="testimonial-row marquee-left"
+        #topRow>
+
+        <div class="testimonial-track">
+
+            @for(review of topTestimonials; track review.id){
+
+            <article class="testimonial-card">
+
+                <div class="customer-image">
+
+                    <img
+                        [src]="review.image"
+                        [alt]="review.name">
+
+                </div>
+
+                <div class="testimonial-content">
+
+                    <div class="quote-icon">
+
+                        <i class="bi bi-quote"></i>
+
+                    </div>
+
+                    <div class="rating">
+
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+
+                    </div>
+
+                    <p class="review">
+
+                        "{{review.comment}}"
+
+                    </p>
+
+                    <div class="customer-info">
+
+                        <h5>
+
+                            {{review.name}}
+
+                        </h5>
+
+                        <span class="verified">
+
+                            <i class="bi bi-patch-check-fill"></i>
+
+                            Verified Buyer
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            }
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Marquee Row 02 -->
+    <!-- ========================= -->
+
+    <div
+        class="testimonial-row marquee-right mt-4"
+        #bottomRow>
+
+        <div class="testimonial-track">
+
+            @for(review of bottomTestimonials; track review.id){
+
+            <article class="testimonial-card">
+
+                <div class="customer-image">
+
+                    <img
+                        [src]="review.image"
+                        [alt]="review.name">
+
+                </div>
+
+                <div class="testimonial-content">
+
+                    <div class="quote-icon">
+
+                        <i class="bi bi-quote"></i>
+
+                    </div>
+
+                    <div class="rating">
+
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+
+                    </div>
+
+                    <p class="review">
+
+                        "{{review.comment}}"
+
+                    </p>
+
+                    <div class="customer-info">
+
+                        <h5>
+
+                            {{review.name}}
+
+                        </h5>
+
+                        <span class="verified">
+
+                            <i class="bi bi-patch-check-fill"></i>
+
+                            Verified Buyer
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            }
+
+        </div>
+
+    </div>
+
+</section>

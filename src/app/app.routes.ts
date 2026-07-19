@@ -7,6 +7,11 @@ export const routes: Routes = [
         title: 'Oxynika Wellness | Premium Himalayan Shilajit'
     },
     {
+        path: 'shop',
+        loadComponent: () => import('./pages/shop/shop').then(m => m.Shop),
+        title: 'Shop | Oxynika Wellness'
+    },
+    {
         path: '**',
         redirectTo: ''
     }

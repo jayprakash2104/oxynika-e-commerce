@@ -56,7 +56,7 @@
 
                     <button
                         type="button"
-                        class="category-tab"
+                        class="tab-pill"
                         [class.active]="selectedTab.id === tab.id"
                         (click)="selectTab(tab)">
 
@@ -84,6 +84,8 @@
                 speed="600"
                 slides-per-view="4"
                 space-between="24"
+                mousewheel="true"
+                mousewheel-force-to-axis="true"
                 breakpoints='{
                     "0":{"slidesPerView":1.2,"spaceBetween":16},
                     "576":{"slidesPerView":2.2,"spaceBetween":16},
@@ -96,73 +98,10 @@
 
                     <swiper-slide>
 
-                        <article class="product-card">
-
-                            @if (product.badge) {
-
-                                <span class="product-badge">
-
-                                    {{ product.badge }}
-
-                                </span>
-
-                            }
-
-                            <div class="product-rating">
-
-                                <i class="bi bi-star-fill"></i>
-
-                                <span>
-
-                                    {{ product.rating }}
-
-                                </span>
-
-                            </div>
-
-                            <div class="product-image">
-
-                                <img
-                                    [src]="product.image"
-                                    [alt]="product.name">
-
-                            </div>
-
-                            <div class="product-content">
-
-                                <h3 class="product-title">
-
-                                    {{ product.name }}
-
-                                </h3>
-
-                                <div class="price-wrapper">
-
-                                    <span class="price">
-
-                                        ₹{{ product.price }}
-
-                                    </span>
-
-                                    <span class="original-price">
-
-                                        ₹{{ product.originalPrice }}
-
-                                    </span>
-
-                                </div>
-
-                                <button
-                                    type="button"
-                                    class="product-btn">
-
-                                    Add To Cart
-
-                                </button>
-
-                            </div>
-
-                        </article>
+                        <app-product-card
+                            [product]="product"
+                        >
+                        </app-product-card>
 
                     </swiper-slide>
 

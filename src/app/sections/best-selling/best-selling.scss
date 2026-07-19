@@ -1,0 +1,187 @@
+@use "../../../styles/core/colors" as *;
+@use "../../../styles/core/fonts" as *;
+@use "../../../styles/core/variables" as *;
+@use "../../../styles/core/mixins" as *;
+
+/* Complete SCSS for the Collection Showcase section */
+
+.best-selling-section {
+    background: $background;
+    overflow: hidden;
+
+    .section-heading {
+        max-width: 720px;
+        margin: 0 auto;
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: .6rem 1.3rem;
+            border-radius:$radius-round;
+            background: $primary-light;
+            color: $primary;
+            font-family: $font-body;
+            font-weight: $fw-600;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: $font-heading;
+            color: $text-primary;
+            font-weight: $fw-700;
+            margin-bottom: 1rem;
+
+            span {
+                color: $primary;
+            }
+        }
+
+        p {
+            color: $text-secondary;
+            font-family: $font-body;
+            line-height: 1.8;
+        }
+
+    }
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.collection-card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    min-height: 260px;
+    border-radius: $radius-lg;
+    text-decoration: none;
+    box-shadow: $shadow-md;
+    isolation: isolate;
+
+    img,
+    video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        @include transition();
+    }
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .25) 55%, rgba(0, 0, 0, .78));
+        z-index: 1;
+        @include transition();
+    }
+
+    .content {
+        position: absolute;
+        left: 2rem;
+        right: 5rem;
+        bottom: 2rem;
+        z-index: 2;
+        @include transition();
+
+        .category {
+            display: block;
+            color: $white;
+            opacity: .9;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin-bottom: .5rem;
+            font-family: $font-body;
+            font-weight: $fw-600;
+            font-size: .8rem;
+        }
+
+        h3 {
+            margin: 0;
+            color: $white;
+            font-family: $font-heading;
+            font-weight: $fw-700;
+            line-height: 1.15;
+            font-size: clamp(1.6rem, 2vw, 2.2rem);
+        }
+
+    }
+
+    .action {
+        position: absolute;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        width: 56px;
+        height: 56px;
+        border-radius: $radius-round;
+        background: white;
+        color: $text-primary;
+        z-index: 2;
+        @include flex-center;
+        @include transition();
+    }
+
+    &:hover {
+
+        img,
+        video {
+            transform: scale(1.08);
+        }
+
+        .overlay {
+            background: linear-gradient(180deg, rgba(0, 0, 0, .15), rgba(0, 0, 0, .35) 45%, rgba(0, 0, 0, .88));
+        }
+
+        .content {
+            transform: translateY(-8px);
+        }
+
+        .action {
+            background: primary;
+            color: white;
+            transform: translateX(.35rem);
+        }
+    }
+}
+
+.collection-card.large {
+    grid-column: span 2;
+    min-height: 360px;
+}
+
+@media (max-width:991px) {
+    .collection-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .collection-card.large {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width:767px) {
+    .collection-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .collection-card,
+    .collection-card.large {
+        grid-column: auto;
+        min-height: 280px;
+    }
+
+    .collection-card .content {
+        left: 1.25rem;
+        right: 4rem;
+        bottom: 1.25rem;
+    }
+
+    .collection-card .action {
+        width: 48px;
+        height: 48px;
+        right: 1rem;
+        bottom: 1rem;
+    }
+}

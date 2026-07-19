@@ -1,0 +1,8 @@
+<button 
+    [type]="config().type" 
+    [class]="config().class">
+    @if (config().icon) {
+        <i class="bi bi-{{ config().icon }}"></i>
+    }
+    {{ config().text }}
+</button>

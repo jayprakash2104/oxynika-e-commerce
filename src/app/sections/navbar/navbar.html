@@ -16,23 +16,30 @@
             <ul class="navbar-nav mx-auto d-none d-lg-flex">
 
                 <li class="nav-item cursor-pointer">
-                    <a class="nav-link active">Home</a>
+                    <a 
+                        class="nav-link active" 
+                        routerLink="/" 
+                        routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact: true}"
+                    >
+                        Home
+                    </a>
                 </li>
 
                 <li class="nav-item cursor-pointer">
-                    <a class="nav-link">Shop</a>
+                    <a class="nav-link" routerLink="/shop" routerLinkActive="active">Shop</a>
                 </li>
 
                 <li class="nav-item cursor-pointer">
-                    <a class="nav-link">About</a>
+                    <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
                 </li>
 
                 <li class="nav-item cursor-pointer">
-                    <a class="nav-link">Reviews</a>
+                    <a class="nav-link" routerLink="/reviews" routerLinkActive="active">Reviews</a>
                 </li>
 
                 <li class="nav-item cursor-pointer">
-                    <a class="nav-link">Contact</a>
+                    <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a>
                 </li>
 
             </ul>

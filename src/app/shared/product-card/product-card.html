@@ -1,0 +1,59 @@
+<article class="product-card">
+
+    @if (product().badge) {
+
+    <span class="product-badge">
+
+        {{ product().badge }}
+
+    </span>
+
+    }
+
+    <div class="product-rating">
+
+        <i class="bi bi-star-fill"></i>
+
+        <span>
+
+            {{ product().rating }}
+
+        </span>
+
+    </div>
+
+    <div class="product-image">
+
+        <img [src]="product().image" [alt]="product().name">
+
+    </div>
+
+    <div class="product-content">
+
+        <h3 class="product-title">
+
+            {{ product().name }}
+
+        </h3>
+
+        <div class="price-wrapper">
+
+            <span class="price">
+
+                ₹{{ product().price }}
+
+            </span>
+
+            <span class="original-price">
+
+                ₹{{ product().originalPrice }}
+
+            </span>
+
+        </div>
+
+        <app-button [config]="buttonConfig" />
+
+    </div>
+
+</article>

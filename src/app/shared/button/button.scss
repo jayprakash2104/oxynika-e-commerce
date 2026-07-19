@@ -1,0 +1,26 @@
+@use "../../../styles/core/colors" as *;
+@use "../../../styles/core/fonts" as *;
+@use "../../../styles/core/variables" as *;
+@use "../../../styles/core/mixins" as *;
+
+.product-btn {
+    @include flex-center;
+    width: 100%;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: $radius-md;
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: $fw-600;
+    cursor: pointer;
+    z-index: 1;
+
+    @include hover-fill(
+        $white,
+        $text-primary,
+        $text-primary,
+        $white,
+        $border 
+    );
+
+}
