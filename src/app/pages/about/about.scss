@@ -1,0 +1,55 @@
+@use '../../../styles/core/colors' as *;
+@use '../../../styles/core/fonts' as *;
+@use '../../../styles/core/variables' as *;
+@use '../../../styles/core/mixins' as *;
+
+/*=========================================
+                ABOUT PAGE
+=========================================*/
+
+.about {
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 0 6rem;
+    background: $background;
+
+    /* From Uiverse.io by Gautammsharma */
+    .grid-wrapper {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .grid-background {
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(to right, $primary-light 1px, transparent 1px),
+            linear-gradient(to bottom, $primary-light 1px, transparent 1px);
+        background-size: 30px 30px;
+        -webkit-mask-image: radial-gradient(
+            ellipse 70% 60% at 50% 0%,
+            $text-primary 60%,
+            transparent 100%
+        );
+        mask-image: radial-gradient(
+            ellipse 70% 60% at 50% 0%,
+            $text-primary 60%,
+            transparent 100%
+        );
+    }
+
+    > .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    @media (max-width: 991px) {
+        padding: 4rem 0;
+    }
+
+    @media (max-width: 767px) {
+        padding: 3rem 0;
+    }
+}
