@@ -99,3 +99,163 @@
     }
 }
 
+/* Mobile offcanvas menu */
+.mobile-menu {
+  --bs-offcanvas-width: 340px;
+
+  background: $white;
+  border-left: 1px solid $border;
+
+  .offcanvas-header {
+    padding: 24px;
+    border-bottom: 1px solid $border;
+  }
+
+  .navbar-brand img {
+    height: 52px;
+    width: auto;
+  }
+
+  .btn-close {
+    box-shadow: none;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .offcanvas-body {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+  }
+
+  .mobile-nav {
+    gap: 0;
+
+    .nav-item {
+      border-bottom: 1px solid $border;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 19px 0;
+      color: $text-primary;
+      font-family: $font-body;
+      font-size: 17px;
+      font-weight: $fw-600;
+      transition: $transition;
+
+      i {
+        font-size: 17px;
+        opacity: 0.5;
+        transition: transform 0.2s ease;
+      }
+
+      &:hover,
+      &.active {
+        color: $primary;
+
+        i {
+          opacity: 1;
+          transform: translate(3px, -3px);
+        }
+      }
+    }
+  }
+
+  .mobile-menu-footer {
+    margin-top: auto;
+    padding-top: 36px;
+
+    p {
+      margin-bottom: 18px;
+      color: $text-primary;
+      font-size: 14px;
+      opacity: 0.75;
+    }
+  }
+
+  .mobile-social-links {
+    display: flex;
+    gap: 12px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid $border;
+      border-radius: $radius-round;
+      background: $white;
+      color: $text-primary;
+      transition: $transition;
+
+      &:hover {
+        background: $primary-light;
+        color: $primary;
+        border-color: $primary;
+      }
+
+      i {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+/* Mobile navbar adjustments */
+@media (max-width: 991.98px) {
+  .custom-navbar {
+    .navbar-content {
+      justify-content: flex-end;
+    }
+
+    .navbar-actions {
+      gap: 10px;
+    }
+
+    .navbar-toggler {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid $border;
+      border-radius: $radius-round;
+      background: $white;
+      color: $text-primary;
+
+      &:hover {
+        background: $primary-light;
+        color: $primary;
+      }
+
+      i {
+        font-size: 26px;
+      }
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .mobile-menu {
+    --bs-offcanvas-width: 290px;
+  }
+
+  .custom-navbar {
+    .navbar-actions {
+      gap: 6px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
+
