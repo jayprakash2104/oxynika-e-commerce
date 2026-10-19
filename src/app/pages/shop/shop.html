@@ -45,18 +45,39 @@
                     </div>
 
                     <div class="sort-box">
-
-
-                        <select>
-
+                        <div class="custom-sort" (click)="$event.stopPropagation()">
+                        <button
+                            type="button"
+                            class="sort-trigger"
+                            aria-label="Sort products"
+                            aria-haspopup="listbox"
+                            [attr.aria-expanded]="sortDropdownOpen"
+                            (click)="sortDropdownOpen = !sortDropdownOpen"
+                        >
+                            <i class="bi bi-filter-right"></i>
+                        </button>
+                    
+                        @if (sortDropdownOpen) {
+                            <div class="sort-dropdown" role="listbox" aria-label="Sort products">
                             @for (sort of sortOptions; track sort) {
-
-                            <option>{{ sort.label }}</option>
-
+                                <button
+                                type="button"
+                                class="sort-option"
+                                role="option"
+                                [attr.aria-selected]="selectedSort === sort.label"
+                                [class.active]="selectedSort === sort.label"
+                                (click)="selectSort(sort)"
+                                >
+                                {{ sort.label }}
+                    
+                                @if (selectedSort === sort.label) {
+                                    <i class="bi bi-check2"></i>
+                                }
+                                </button>
                             }
-
-                        </select>
-
+                            </div>
+                        }
+                        </div>
                     </div>
 
             </div>

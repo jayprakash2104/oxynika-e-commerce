@@ -53,15 +53,20 @@
     ========================== */
 
     .category-wrapper {
+        width: 100%;
         margin-bottom: 36px;
+        min-width: 0;
     }
 
     .category-tabs {
         display: flex;
+        align-items: center;
+        width: 100%;
         gap: 12px;
-
         overflow-x: auto;
+        overflow-y: hidden;
         scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
 
         &::-webkit-scrollbar {
             display: none;

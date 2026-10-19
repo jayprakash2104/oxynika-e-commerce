@@ -26,14 +26,14 @@ export class Shop {
     { id: 4, name: 'Hair Care' },
     { id: 5, name: 'Supplements' }
   ];
-
-  // Sort options for sorting products
+  sortDropdownOpen = false;
+  selectedSort = 'Default';
   sortOptions = [
-    { value: 'newest', label: 'Newest' },
-    { value: 'popular', label: 'Popularity' },
-    { value: 'low-high', label: 'Price : Low to High' },
-    { value: 'high-low', label: 'Price : High to Low' },
-    { value: 'rating', label: 'Highest Rated' }
+    { label: 'Default', value: 'default' },
+    { label: 'Price: Low to High', value: 'price-asc' },
+    { label: 'Price: High to Low', value: 'price-desc' },
+    { label: 'Name: A to Z', value: 'name-asc' },
+    { label: 'Name: Z to A', value: 'name-desc' },
   ];
 
   // Products list to be displayed on the shop page
@@ -152,5 +152,10 @@ export class Shop {
   ]);
   
 
-
+  selectSort(sort: { label: string; value: string }): void {
+    this.selectedSort = sort.label;
+    this.sortDropdownOpen = false;
+  
+    // Apply your product sorting logic here using sort.value.
+  }
 }

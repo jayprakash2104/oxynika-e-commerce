@@ -66,11 +66,18 @@
 }
 
 .tab-pill {
-    padding: 12px 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: max-content;
+    min-height: 42px;
+    padding: 10px 22px;
     border-radius: $radius-round;
     white-space: nowrap;
     font-size: 15px;
     font-weight: $fw-600;
+    line-height: 1;
     cursor: pointer;
     z-index: 1;
 
@@ -79,7 +86,7 @@
         $primary,
         $text-primary,
         $white,
-        $border 
+        $border
     );
 
     &.active {

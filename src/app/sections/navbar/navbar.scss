@@ -107,12 +107,12 @@
   border-left: 1px solid $border;
 
   .offcanvas-header {
-    padding: 24px;
+    padding: 8px 24px;
     border-bottom: 1px solid $border;
   }
 
   .navbar-brand img {
-    height: 52px;
+    height: 48px;
     width: auto;
   }
 
@@ -128,7 +128,7 @@
   .offcanvas-body {
     display: flex;
     flex-direction: column;
-    padding: 24px;
+    padding: 0px 24px 24px;
   }
 
   .mobile-nav {
@@ -142,10 +142,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 19px 0;
+      padding: 16px 0;
       color: $text-primary;
       font-family: $font-body;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: $fw-600;
       transition: $transition;
 

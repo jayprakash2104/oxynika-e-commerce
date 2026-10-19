@@ -38,43 +38,36 @@
     $hover-text,
     $border-color: $bg-color
 ) {
-
     position: relative;
+    isolation: isolate;
     overflow: hidden;
 
     background: $bg-color;
     color: $text-color;
-
     border: 1px solid $border-color;
 
     transition: $transition;
 
     &::before {
-
         content: "";
-
         position: absolute;
         inset: 0;
 
         background: $hover-bg;
-
         clip-path: circle(0% at 50% 100%);
 
         transition: clip-path 0.55s cubic-bezier(0.39, 0.58, 0.57, 1);
 
         z-index: -1;
+        pointer-events: none;
     }
 
     &:hover {
-
         color: $hover-text;
-
         border-color: $hover-bg;
 
-        &::before{
+        &::before {
             clip-path: circle(160% at 50% 100%);
         }
-
     }
-
 }
