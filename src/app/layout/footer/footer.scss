@@ -187,3 +187,82 @@
         text-align: center;
     }
 }
+
+.scroll-to-top {
+  position: fixed;
+  right: 26px;
+  bottom: 28px;
+  z-index: 1050;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Transparent glass effect — no solid background
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(36, 125, 178, 0.22);
+  border-radius: 50%;
+
+  color: #247db2;
+  font-size: 23px;
+  cursor: pointer;
+
+  box-shadow: 0 4px 20px rgba(36, 125, 178, 0.08);
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    color 0.3s ease;
+
+  i {
+    display: inline-block;
+    animation: arrow-wave 1.8s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  &:hover {
+    color: #62ad4d;
+    border-color: rgba(98, 173, 77, 0.5);
+    box-shadow: 0 0 22px rgba(36, 125, 178, 0.16);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(36, 125, 178, 0.6);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 576px) {
+    right: 16px;
+    bottom: 18px;
+    width: 42px;
+    height: 42px;
+    font-size: 21px;
+  }
+}
+
+@keyframes arrow-wave {
+  0%,
+  100% {
+    transform: translateY(3px);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-to-top i {
+    animation: none;
+  }
+
+  .scroll-to-top {
+    transition: none;
+  }
+}

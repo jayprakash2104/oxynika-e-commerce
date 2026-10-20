@@ -3,6 +3,11 @@
 @use "../../../styles/core/variables" as *;
 @use "../../../styles/core/mixins" as *;
 
+:host {
+  display: block;
+  height: 100px;
+}
+
 .custom-navbar {
     background: $white;
     border-bottom: 1px solid $border;
