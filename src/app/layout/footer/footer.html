@@ -226,3 +226,14 @@
     </div>
 
 </footer>
+
+@if (showScrollTop()) {
+    <button
+      type="button"
+      class="scroll-to-top"
+      aria-label="Scroll to top"
+      (click)="scrollToTop()"
+    >
+      <i class="bi bi-arrow-up"></i>
+    </button>
+  }

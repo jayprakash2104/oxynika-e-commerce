@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,HostListener, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -10,5 +10,18 @@ import { RouterLink } from '@angular/router';
 })
 export class Footer {
 readonly currentYear: number = new Date().getFullYear();
+showScrollTop = signal(false);
+
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
+    this.showScrollTop.set(window.scrollY > 300);
+  }
+
+  scrollToTop(): void {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 
 }
