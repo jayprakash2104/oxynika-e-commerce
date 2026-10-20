@@ -1,149 +1,345 @@
 <app-header></app-header>
-
 <app-navbar></app-navbar>
 
-<app-hero></app-hero>
+<main class="shop">
 
-<section class="shop">
+  <!-- ================= SHOP HERO ================= -->
+  <section class="shop-hero">
+
+    <div class="shop-hero-bg" aria-hidden="true">
+      <span class="hero-glow hero-glow-blue"></span>
+      <span class="hero-glow hero-glow-green"></span>
+      <span class="hero-decoration"></span>
+    </div>
+
+    <div class="container">
+      <div class="shop-hero-layout">
+
+        <!-- Left: Hero content -->
+        <div class="shop-hero-copy">
+
+          <span class="shop-eyebrow">
+            <span class="eyebrow-dot"></span>
+            SHOP PRODUCTS
+          </span>
+
+          <h1>
+            Feel better.
+            <span>Live well.</span>
+          </h1>
+
+          <p>
+            Discover everyday wellness essentials, thoughtfully
+            selected for you.
+          </p>
+
+          <!-- Search -->
+          <div class="shop-hero-search-area">
+
+            <label class="shop-search-label">
+              FIND YOUR WELLNESS ESSENTIALS
+            </label>
+
+            <div class="shop-search">
+
+              <i class="bi bi-search search-icon"></i>
+
+              <input
+                type="search"
+                placeholder="Search products or ingredients..."
+                aria-label="Search products or ingredients"
+                [value]="searchTerm()"
+                (input)="onSearch($event)"
+              />
+
+              @if (searchTerm()) {
+                <button
+                  type="button"
+                  class="clear-search"
+                  aria-label="Clear search"
+                >
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              }
+
+              <button
+                type="button"
+                class="search-submit"
+                aria-label="Explore products"
+              >
+                <i class="bi bi-arrow-right"></i>
+              </button>
+
+            </div>
+
+            <div class="shop-search-note">
+              <i class="bi bi-shield-check"></i>
+              <span>Find the right products for your routine</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right: Diagonal scrolling gallery -->
+        <div
+          class="shop-hero-gallery"
+          aria-label="Featured wellness products"
+        >
+
+          <!-- First diagonal lane -->
+          <div class="gallery-column gallery-column-one">
+            <div class="gallery-track gallery-track-up">
+
+              @for (item of heroGallery; track $index) {
+                <article class="gallery-product">
+
+                  <img
+                    [src]="item.image"
+                    [alt]="item.name"
+                    loading="lazy"
+                    draggable="false"
+                  />
+
+                  <div class="gallery-product-label">
+                    {{ item.name }}
+                  </div>
+
+                </article>
+              }
+
+            </div>
+          </div>
+
+          <!-- Second diagonal lane -->
+          <div class="gallery-column gallery-column-two">
+            <div class="gallery-track gallery-track-down">
+
+              @for (item of heroGalleryReverse; track $index) {
+                <article class="gallery-product">
+
+                  <img
+                    [src]="item.image"
+                    [alt]="item.name"
+                    loading="lazy"
+                    draggable="false"
+                  />
+
+                  <div class="gallery-product-label">
+                    {{ item.name }}
+                  </div>
+
+                </article>
+              }
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SHOP CATALOG ================= -->
+  <section class="shop-catalog" id="shop-products">
 
     <div class="container">
 
-        <!-- Filter Wrapper -->
+      <!-- Category and filter panel -->
+      <section class="shop-filter-wrapper" #filterSection>
 
-        <div class="shop-filter-wrapper">
+        <!-- Filter heading -->
+        <div class="filter-header">
 
-            <!-- Top Row -->
+          <div class="filter-label">
 
-            <div class="filter-header">
+            <span class="filter-icon">
+              <i class="bi bi-grid"></i>
+            </span>
 
-                <div class="category-tabs">
+            <div>
+              <h2>Explore our collection</h2>
+              <p>Find the right essentials for your wellness journey.</p>
+            </div>
 
-                    @for(category of categories; track category){
+          </div>
 
-                    <button type="button" class="tab-pill">
+        </div>
 
-                        {{ category.name }}
+        <!-- Category tabs -->
+        <div class="category-tabs" aria-label="Product categories">
+
+          @for (category of categories; track category.id) {
+            <button
+              type="button"
+              class="tab-pill"
+              [class.active]="selectedCategory() === category.name"
+              [attr.aria-pressed]="selectedCategory() === category.name"
+              (click)="selectCategory(category)"
+            >
+
+              @switch (category.name) {
+                @case ('All') {
+                  <i class="bi bi-grid"></i>
+                }
+                @case ('Shilajit') {
+                  <i class="bi bi-droplet"></i>
+                }
+                @case ('Skin Care') {
+                  <i class="bi bi-stars"></i>
+                }
+                @case ('Hair Care') {
+                  <i class="bi bi-flower1"></i>
+                }
+                @case ('Supplements') {
+                  <i class="bi bi-capsule"></i>
+                }
+                @default {
+                  <i class="bi bi-tag"></i>
+                }
+              }
+
+              <span>{{ category.name }}</span>
+
+            </button>
+          }
+
+        </div>
+
+        <!-- Results and sorting toolbar -->
+        <div class="shop-toolbar">
+
+          <div class="results-summary">
+            <span class="results-summary-dot"></span>
+
+            <span>
+              Showing {{ filteredProducts().length }}
+              {{ filteredProducts().length === 1 ? 'product' : 'products' }}
+            </span>
+          </div>
+
+          <div class="sort-box">
+
+            <span class="sort-label">Sort by</span>
+
+            <div class="custom-sort">
+
+              <button
+                type="button"
+                class="sort-trigger"
+                aria-label="Choose product sorting"
+                [attr.aria-expanded]="sortDropdownOpen"
+                (click)="sortDropdownOpen = !sortDropdownOpen"
+              >
+                <i class="bi bi-sliders"></i>
+              </button>
+
+              @if (sortDropdownOpen) {
+                <div class="sort-dropdown">
+
+                  @for (option of sortOptions; track option.value) {
+                    <button
+                      type="button"
+                      class="sort-option"
+                      [class.active]="selectedSort === option.label"
+                      (click)="selectSort(option)"
+                    >
+
+                      <span>{{ option.label }}</span>
+
+                      @if (selectedSort === option.label) {
+                        <i class="bi bi-check2"></i>
+                      }
 
                     </button>
-
-                    }
+                  }
 
                 </div>
+              }
 
             </div>
+          </div>
 
-            <!-- Bottom Row -->
-
-            <div class="shop-toolbar">
-
-                    <div class="search-box">
-
-                        <i class="bi bi-search"></i>
-
-                        <input type="text" placeholder="Search products..." />
-
-                    </div>
-
-                    <div class="sort-box">
-                        <div class="custom-sort" (click)="$event.stopPropagation()">
-                        <button
-                            type="button"
-                            class="sort-trigger"
-                            aria-label="Sort products"
-                            aria-haspopup="listbox"
-                            [attr.aria-expanded]="sortDropdownOpen"
-                            (click)="sortDropdownOpen = !sortDropdownOpen"
-                        >
-                            <i class="bi bi-filter-right"></i>
-                        </button>
-                    
-                        @if (sortDropdownOpen) {
-                            <div class="sort-dropdown" role="listbox" aria-label="Sort products">
-                            @for (sort of sortOptions; track sort) {
-                                <button
-                                type="button"
-                                class="sort-option"
-                                role="option"
-                                [attr.aria-selected]="selectedSort === sort.label"
-                                [class.active]="selectedSort === sort.label"
-                                (click)="selectSort(sort)"
-                                >
-                                {{ sort.label }}
-                    
-                                @if (selectedSort === sort.label) {
-                                    <i class="bi bi-check2"></i>
-                                }
-                                </button>
-                            }
-                            </div>
-                        }
-                        </div>
-                    </div>
-
-            </div>
         </div>
 
-        <!-- Products -->
+      </section>
 
-        <div class="row g-4">
+      <!-- ================= PRODUCTS ================= -->
+      <section class="shop-results">
 
-            @for(product of products(); track product.id){
+        <!-- Products heading -->
+        <div class="shop-results-heading">
 
-            <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3">
+          <div>
+            <span class="results-kicker">
+              MADE FOR YOUR WELL-BEING
+            </span>
 
-                <app-product-card [product]="product">
-                </app-product-card>
+            <h2>
+              @if (selectedCategory() === 'All') {
+                Our Products
+              } @else {
+                {{ selectedCategory() }}
+              }
+            </h2>
+          </div>
 
-            </div>
+          <div class="results-badge">
+            <i class="bi bi-leaf"></i>
+            <span>Wellness essentials</span>
+          </div>
 
+        </div>
+
+        <!-- Product list -->
+        @if (filteredProducts().length > 0) {
+
+          <div class="row g-4">
+
+            @for (product of filteredProducts(); track product.id) {
+              <div class="col-12 col-md-4 col-xl-3">
+
+                <app-product-card
+                  [product]="product"
+                ></app-product-card>
+
+              </div>
             }
 
-        </div>
+          </div>
 
-        <!-- Pagination -->
+        } @else {
 
-        <nav class="shop-pagination">
+          <!-- Empty state -->
+          <div class="empty-products">
 
-            <button class="page-btn">
+            <div class="empty-products-icon">
+              <i class="bi bi-search"></i>
+            </div>
 
-                <i class="bi bi-arrow-left"></i>
+            <h3>No products found</h3>
 
+            <p>
+              We couldn't find any products matching your search.
+              Try another keyword or explore the full collection.
+            </p>
+
+            <button
+              type="button"
+              class="tab-pill"
+            >
+              <i class="bi bi-arrow-counterclockwise"></i>
+              View all products
             </button>
 
-            <button class="page-number active">
+          </div>
 
-                1
+        }
 
-            </button>
-
-            <button class="page-number">
-
-                2
-
-            </button>
-
-            <button class="page-number">
-
-                3
-
-            </button>
-
-            <button class="page-number">
-
-                4
-
-            </button>
-
-            <button class="page-btn">
-
-                <i class="bi bi-arrow-right"></i>
-
-            </button>
-
-        </nav>
+      </section>
 
     </div>
+  </section>
 
-</section>
+</main>
 
 <app-footer></app-footer>

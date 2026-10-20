@@ -1,46 +1,253 @@
+
 @use "../../../styles/core/colors" as *;
 @use "../../../styles/core/fonts" as *;
 @use "../../../styles/core/variables" as *;
 @use "../../../styles/core/mixins" as *;
 
+/* =====================================
+   OXYNIKA — LOGO-INSPIRED ANNOUNCEMENT BAR
+===================================== */
+
 .top-header {
-    background: $background-light;
-    border-bottom: 1px solid $border;
-    font-family: $font-body;
-    font-size: 13px;
-    font-weight: $fw-500;
-    color: $text-secondary;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  overflow: hidden;
+  font-family: $font-body;
+  color: #174f7b;
+
+  background:
+    radial-gradient(
+      ellipse at 12% 50%,
+      rgba(66, 157, 216, 0.09),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 88% 50%,
+      rgba(111, 190, 92, 0.08),
+      transparent 42%
+    ),
+    linear-gradient(
+      100deg,
+      #f1f8fd 0%,
+      #ffffff 48%,
+      #f5faf4 100%
+    );
+
+  border-bottom: 1px solid rgba(35, 105, 155, 0.12);
 }
 
-.top-header .container {
-    height: 42px;
+/* Subtle highlight line */
+.top-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  pointer-events: none;
 
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(35, 132, 193, 0.45),
+    rgba(105, 184, 81, 0.45),
+    transparent
+  );
 }
 
-.header-item {
-    @include flex-center;
+.announcement-marquee {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+
+  /* Soft fade at both edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+}
+
+.announcement-track {
+  display: flex;
+  flex-shrink: 0;
+  width: max-content;
+
+  animation: announcement-scroll 35s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+.announcement-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 54px;
+  padding-right: 54px;
+}
+
+.announcement-item {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 9px;
+  white-space: nowrap;
+
+  color: #52677a;
+  font-size: 12px;
+  font-weight: $fw-500;
+  letter-spacing: 0.12px;
+
+  transition: color 0.2s ease;
+
+  i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+
+    border: 1px solid rgba(41, 128, 185, 0.13);
+    border-radius: 50%;
+
+    background: linear-gradient(
+      145deg,
+      #ffffff,
+      #edf6fc
+    );
+
+    color: #2585bd;
     font-size: 13px;
-    font-weight: $fw-500;
-    i{
-        color: $primary-dark;
+
+    box-shadow: 0 2px 5px rgba(34, 100, 145, 0.07);
+
+    transition:
+      color 0.2s ease,
+      background 0.2s ease,
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  /* Alternate blue and logo green accents */
+  &:nth-child(4n + 2) i,
+  &:nth-child(4n + 3) i {
+    color: #62ad4d;
+    border-color: rgba(98, 173, 77, 0.18);
+    background: linear-gradient(
+      145deg,
+      #ffffff,
+      #f0f8ed
+    );
+  }
+
+  &:hover {
+    color: #174f7b;
+
+    i {
+      transform: translateY(-1px);
+      border-color: rgba(41, 128, 185, 0.3);
     }
+  }
 }
 
-.header-item {
-    gap: 8px;
+/* Seamless right-to-left animation */
+@keyframes announcement-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
-
-/* Mobile */
+/* =====================================
+   TABLET
+===================================== */
 
 @media (max-width: 991.98px) {
+  .announcement-marquee {
+    height: 37px;
+  }
 
-    .top-header .container {
-        height: 36px;
+  .announcement-group {
+    gap: 36px;
+    padding-right: 36px;
+  }
+
+  .announcement-item {
+    font-size: 11px;
+
+    i {
+      width: 22px;
+      height: 22px;
+      font-size: 12px;
     }
+  }
+}
 
-    .header-item {
-        font-size: 12px;
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 575.98px) {
+  .announcement-marquee {
+    height: 35px;
+
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 4%,
+      #000 96%,
+      transparent
+    );
+
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 4%,
+      #000 96%,
+      transparent
+    );
+  }
+
+  .announcement-group {
+    gap: 27px;
+    padding-right: 27px;
+  }
+
+  .announcement-item {
+    gap: 7px;
+    font-size: 10px;
+    letter-spacing: 0;
+
+    i {
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
     }
+  }
+}
 
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .announcement-track {
+    animation: none;
+  }
 }

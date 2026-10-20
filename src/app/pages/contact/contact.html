@@ -1,1 +1,334 @@
-<p>contact works!</p>
+<app-header></app-header>
+
+<app-navbar></app-navbar>
+
+
+<section class="contact-hero position-relative overflow-hidden">
+    <!-- Background image and overlay -->
+    <div class="contact-hero-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+  
+    <div class="container position-relative">
+      <div class="row align-items-center contact-hero-content">
+        <!-- Hero text -->
+        <div class="col-12 col-lg-7 col-xl-6">
+          <div class="contact-hero-copy">
+            <span class="contact-eyebrow d-inline-block mb-3">
+              CONTACT US
+            </span>
+  
+            <h1 class="contact-hero-title mb-3">
+              We're just a
+              <span class="typing-text">message away.</span>
+            </h1>
+  
+            <p class="contact-hero-description mb-4">
+              Have questions about our products, your order, or your
+              wellness journey? Our team is here to help you, anytime.
+            </p>
+  
+            <div class="row g-3 contact-hero-features">
+              <div class="col-6">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="contact-feature-icon flex-shrink-0">
+                    <i class="bi bi-leaf"></i>
+                  </span>
+                  <span class="contact-feature-text">
+                    Friendly<br />Support
+                  </span>
+                </div>
+              </div>
+  
+              <div class="col-6">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="contact-feature-icon flex-shrink-0">
+                    <i class="bi bi-shield-check"></i>
+                  </span>
+                  <span class="contact-feature-text">
+                    Quick<br />Response
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Reserved space for the product image in your banner -->
+        <div class="d-none d-lg-block col-lg-5 col-xl-6"></div>
+      </div>
+    </div>
+  </section>
+  
+
+  
+<!-- Contact Form + Contact Information -->
+<section class="contact-details py-5">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+  
+        <!-- LEFT: Contact Form -->
+        <div class="col-12 col-lg-7">
+          <div class="contact-form-card p-4 p-md-5">
+  
+            <div class="mb-4">
+              <span class="contact-section-label">WE'RE HERE TO HELP</span>
+              <h2 class="contact-card-title mt-2 mb-2">
+                Send us a Message
+              </h2>
+              <p class="contact-muted mb-0">
+                Fill out the form below and we'll get back to you shortly.
+              </p>
+            </div>
+  
+            
+            <form [formGroup]="contactForm" (ngSubmit)="submitContactForm()" novalidate>
+                <!-- Success message -->
+                @if (successMessage) {
+                <div class="alert alert-success" role="status" aria-live="polite">
+                    <i class="bi bi-check-circle me-2"></i>
+                    {{ successMessage }}
+                </div>
+                }
+            
+                <!-- Submission error -->
+                @if (errorMessage) {
+                <div class="alert alert-danger" role="alert" aria-live="assertive">
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    {{ errorMessage }}
+                </div>
+                }
+            
+                <div class="row g-3">
+                    <!-- Full name -->
+                    <div class="col-12 col-md-6">
+                        <label for="contactName" class="form-label">
+                            Full Name <span class="required-mark">*</span>
+                        </label>
+            
+                        <div class="contact-input-wrap">
+                            <i class="bi bi-person"></i>
+                            <input id="contactName" type="text" class="form-control" formControlName="fullName"
+                                placeholder="Enter your full name" autocomplete="name"
+                                [class.is-invalid]="f.fullName.touched && f.fullName.invalid" />
+                        </div>
+            
+                        @if (f.fullName.touched && f.fullName.hasError('required')) {
+                        <small class="field-error">Full name is required.</small>
+                        } @else if (f.fullName.touched && f.fullName.hasError('minlength')) {
+                        <small class="field-error">Enter at least 2 characters.</small>
+                        } @else if (f.fullName.touched && f.fullName.hasError('maxlength')) {
+                        <small class="field-error">Maximum 100 characters allowed.</small>
+                        }
+                    </div>
+            
+                    <!-- Email -->
+                    <div class="col-12 col-md-6">
+                        <label for="contactEmail" class="form-label">
+                            Email Address <span class="required-mark">*</span>
+                        </label>
+            
+                        <div class="contact-input-wrap">
+                            <i class="bi bi-envelope"></i>
+                            <input id="contactEmail" type="email" class="form-control" formControlName="email"
+                                placeholder="Enter your email address" autocomplete="email"
+                                [class.is-invalid]="f.email.touched && f.email.invalid" />
+                        </div>
+            
+                        @if (f.email.touched && f.email.hasError('required')) {
+                        <small class="field-error">Email is required.</small>
+                        } @else if (f.email.touched && f.email.hasError('email')) {
+                        <small class="field-error">Enter a valid email address.</small>
+                        } @else if (f.email.touched && f.email.hasError('maxlength')) {
+                        <small class="field-error">Email is too long.</small>
+                        }
+                    </div>
+            
+                    <!-- Phone -->
+                    <div class="col-12 col-md-6">
+                        <label for="contactPhone" class="form-label">
+                            Phone Number <span class="optional-label">(optional)</span>
+                        </label>
+            
+                        <div class="contact-input-wrap">
+                            <i class="bi bi-telephone"></i>
+                            <input id="contactPhone" inputmode="numeric" type="number" class="form-control" formControlName="phone"
+                                placeholder="Enter your phone number" autocomplete="tel"
+                                [class.is-invalid]="f.phone.touched && f.phone.invalid" />
+                        </div>
+            
+                        @if (f.phone.touched && f.phone.hasError('pattern')) {
+                        <small class="field-error">
+                            Enter a valid phone number (7–20 characters).
+                        </small>
+                        }
+                    </div>
+            
+                    <!-- Subject -->
+                    <div class="col-12 col-md-6">
+                        <label for="contactSubject" class="form-label">
+                            Subject <span class="required-mark">*</span>
+                        </label>
+            
+                        <div class="contact-input-wrap">
+                            <i class="bi bi-chat-square-text"></i>
+                            <select id="contactSubject" class="form-select" formControlName="subject"
+                                [class.is-invalid]="f.subject.touched && f.subject.invalid">
+                                <option value="" disabled>Select a subject</option>
+                                <option value="product">Product enquiry</option>
+                                <option value="order">Order support</option>
+                                <option value="shipping">Shipping and delivery</option>
+                                <option value="returns">Returns and refunds</option>
+                                <option value="wellness">Wellness questions</option>
+                                <option value="other">Other enquiry</option>
+                            </select>
+                        </div>
+            
+                        @if (f.subject.touched && f.subject.hasError('required')) {
+                        <small class="field-error">Please select a subject.</small>
+                        }
+                    </div>
+            
+                    <!-- Message -->
+                    <div class="col-12">
+                        <label for="contactMessage" class="form-label">
+                            Message <span class="required-mark">*</span>
+                        </label>
+            
+                        <div class="contact-input-wrap contact-message-wrap">
+                            <i class="bi bi-chat-dots"></i>
+                            <textarea id="contactMessage" class="form-control" formControlName="message" rows="5"
+                                placeholder="Tell us how we can help you..."
+                                [class.is-invalid]="f.message.touched && f.message.invalid"></textarea>
+                        </div>
+            
+                        <div class="d-flex justify-content-between align-items-start gap-2">
+                            @if (f.message.touched && f.message.hasError('required')) {
+                            <small class="field-error">Message is required.</small>
+                            } @else if (f.message.touched && f.message.hasError('minlength')) {
+                            <small class="field-error">
+                                Please enter at least 10 characters.
+                            </small>
+                            } @else if (f.message.touched && f.message.hasError('maxlength')) {
+                            <small class="field-error">
+                                Maximum 2000 characters allowed.
+                            </small>
+                            } @else {
+                            <span></span>
+                            }
+            
+                            <small class="text-secondary flex-shrink-0">
+                                {{ f.message.value.length }}/2000
+                            </small>
+                        </div>
+                    </div>
+            
+                    <!-- Submit button -->
+                    <div class="col-12 pt-2">
+                        <button type="submit" class="contact-submit-btn" [disabled]="isSubmitting" [attr.aria-busy]="isSubmitting">
+                            @if (isSubmitting) {
+                            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                            <span>Sending Message...</span>
+                            } @else {
+                            <span>Send Message</span>
+                            <i class="bi bi-arrow-right"></i>
+                            }
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+          </div>
+        </div>
+  
+        <!-- RIGHT: Contact Details + Map -->
+        <div class="col-12 col-lg-5">
+          <div class="d-flex flex-column gap-3 h-100">
+  
+            <!-- Get in Touch -->
+            <div class="get-in-touch-card p-4 flex-grow-1">
+              <span class="contact-section-label">LET'S CONNECT</span>
+              <h2 class="contact-card-title mt-2 mb-2">
+                Get in Touch
+              </h2>
+              <p class="contact-muted mb-4">
+                We'd love to hear from you. Here are the ways you can reach us.
+              </p>
+  
+              <!-- Email -->
+              <a
+                class="contact-info-item"
+                href="mailto:support@oxynika.com"
+              >
+                <span class="contact-info-icon">
+                  <i class="bi bi-envelope"></i>
+                </span>
+                <span class="contact-info-copy">
+                  <strong>Email Us</strong>
+                  <span>support@oxynika.com</span>
+                  <small>Send us your questions anytime.</small>
+                </span>
+                <i class="bi bi-arrow-up-right contact-info-arrow"></i>
+              </a>
+  
+              <!-- Phone: replace with your actual support number -->
+              <div class="contact-info-item">
+                <span class="contact-info-icon">
+                  <i class="bi bi-telephone"></i>
+                </span>
+                <span class="contact-info-copy">
+                  <strong>Call Us</strong>
+                  <span>+91 7077700126</span>
+                  <small>We're happy to assist you.</small>
+                </span>
+              </div>
+  
+              <!-- Address: replace with your actual business address -->
+              <div class="contact-info-item">
+                <span class="contact-info-icon">
+                  <i class="bi bi-geo-alt"></i>
+                </span>
+                <span class="contact-info-copy">
+                  <strong>Visit Us</strong>
+                  <span>Oxynika Wellness, Beherasahi, Nuasahi, Nayapalli, Bhubaneswar, Odisha 751012</span>
+                  <small>We look forward to connecting with you.</small>
+                </span>
+              </div>
+            </div>
+  
+            <!-- Map -->
+            
+            <div class="contact-map-card">
+                <div class="contact-map-visual">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.231754425575!2d85.81528447446061!3d20.29067221272109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190943d0394f0d%3A0xd8d62561f599f314!2sOxynika%20Wellness!5e0!3m2!1sen!2sin!4v1792431594704!5m2!1sen!2sin"
+                        title="Oxynika Wellness location on Google Maps" width="100%" height="280" style="border: 0;"
+                        allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
+                    </iframe>
+                </div>
+
+                <div class="contact-map-footer p-3">
+                    <div>
+                        <strong>Come say hello</strong>
+                        <p class="contact-muted mb-0">
+                            We'd love to hear from you.
+                        </p>
+                    </div>
+
+                    <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Oxynika+Wellness" target="_blank"
+                        rel="noopener noreferrer">
+                        View Map <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                </div>
+            </div>
+  
+  
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+
+
+
+<app-footer></app-footer>

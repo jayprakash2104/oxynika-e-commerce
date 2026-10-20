@@ -1,100 +1,288 @@
+<!-- ============================================
+     DESKTOP NAVBAR
+============================================ -->
 <nav class="navbar navbar-expand-lg custom-navbar">
+  <div class="container">
 
-    <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand" routerLink="/">
+      <img
+        class="img-fluid"
+        src="/images/logo/logo.png"
+        alt="Oxynika Wellness"
+      />
+    </a>
 
-        <!-- Logo -->
-        <a class="navbar-brand" routerLink="/">
-            <img 
-                class="img-fluid cursor-pointer"
-                src="/images/logo/logo.png"
-                alt="Oxynika Wellness">
-        </a>
+    <div class="navbar-content d-flex justify-content-end align-items-center flex-grow-1">
 
-        <!-- Desktop Menu -->
-        <div class="navbar-content d-flex justify-content-end align-items-center flex-grow-1">
+      <!-- Desktop navigation links -->
+      <ul class="navbar-nav mx-auto d-none d-lg-flex">
+        @for (item of navItems; track item.label) {
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="item.route"
+              [fragment]="item.fragment"
+              [routerLinkActive]="item.activeRoute ? 'active' : ''"
+              [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+            >
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </ul>
 
-            <ul class="navbar-nav mx-auto d-none d-lg-flex">
+      <div class="navbar-actions">
 
-                @for (item of navItems; track item.label) {
+        <!-- Search -->
+        <button
+          type="button"
+          class="icon-btn"
+          aria-label="Search products"
+          routerLink="/shop"
+        >
+          <i class="bi bi-search"></i>
+        </button>
 
-                    <li class="nav-item cursor-pointer">
+        <!-- ================= WISHLIST DROPDOWN ================= -->
+        <div class="dropdown d-none d-lg-block">
+          <button
+            type="button"
+            class="icon-btn"
+            aria-label="Wishlist"
+            data-bs-toggle="dropdown"
+            data-bs-auto-close="outside"
+            aria-expanded="false"
+          >
+            <i class="bi bi-heart"></i>
+          </button>
 
-                        @if(item.activeRoute){
+          <div class="dropdown-menu dropdown-menu-end nav-dropdown wishlist-dropdown">
 
-                        <a
-                            class="nav-link"
-                            [routerLink]="item.route"
-                            [fragment]="item.fragment"
-                            routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: item.exact ?? false }">
-
-                            {{ item.label }}
-
-                        </a>
-
-                        } @else {
-
-                        <a
-                            class="nav-link"
-                            [routerLink]="item.route"
-                            [fragment]="item.fragment">
-
-                            {{ item.label }}
-
-                        </a>
-
-                        }
-
-                    </li>
-
-                }
-
-            </ul>
-
-            <div class="navbar-actions">
-
-                <button class="icon-btn">
-                    <i class="bi bi-search"></i>
-                </button>
-
-                <button class="icon-btn d-none d-lg-flex">
-                    <i class="bi bi-heart"></i>
-                </button>
-
-                <button class="icon-btn position-relative">
-                    <i class="bi bi-bag"></i>
-                    <span class="cart-count">0</span>
-                </button>
-
-                <button class="icon-btn d-none d-lg-flex">
-                    <i class="bi bi-person"></i>
-                </button>
-
-                <!-- Mobile Toggle -->
-
-                <button
-                    class="navbar-toggler d-lg-none"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#mobileMenu"
-                    aria-controls="mobileMenu"
-                    aria-label="Open navigation menu">
-
-                    <i class="bi bi-list"></i>
-
-                </button>
-
-
+            <div class="nav-dropdown-header">
+              <div>
+                <small>YOUR COLLECTION</small>
+                <h6>
+                  My Wishlist
+                  <span>{{ wishlistItems().length }}</span>
+                </h6>
+              </div>
+              <i class="bi bi-heart"></i>
             </div>
 
+            @if (wishlistItems().length > 0) {
+              <div class="nav-dropdown-products">
+                @for (item of wishlistItems(); track item.name) {
+                  <div class="nav-dropdown-product">
+
+                    <img [src]="item.image" [alt]="item.name" />
+
+                    <div class="nav-dropdown-product-info">
+                      <strong>{{ item.name }}</strong>
+                      <small>{{ item.category }}</small>
+                      <b>{{ formatPrice(item.price) }}</b>
+                    </div>
+
+                    <button
+                      type="button"
+                      class="nav-remove-btn"
+                      aria-label="Remove from wishlist"
+                      (click)="removeWishlistItem(item.name)"
+                    >
+                      <i class="bi bi-heart-fill"></i>
+                    </button>
+
+                  </div>
+                }
+              </div>
+            } @else {
+              <div class="nav-dropdown-empty">
+                <i class="bi bi-heart"></i>
+                <strong>Your wishlist is waiting</strong>
+                <p>Save your favourite wellness essentials here.</p>
+              </div>
+            }
+
+            <a class="nav-dropdown-cta" routerLink="/wishlist">
+              View wishlist
+              <i class="bi bi-arrow-up-right"></i>
+            </a>
+
+          </div>
         </div>
 
-    </div>
+        <!-- ================= CART DROPDOWN ================= -->
+        <div class="dropdown">
+          <button
+            type="button"
+            class="icon-btn position-relative"
+            aria-label="Shopping cart"
+            data-bs-toggle="dropdown"
+            data-bs-auto-close="outside"
+            aria-expanded="false"
+          >
+            <i class="bi bi-bag"></i>
+            <span class="cart-count">{{ cartCount() }}</span>
+          </button>
 
+          <div class="dropdown-menu dropdown-menu-end nav-dropdown cart-dropdown">
+
+            <div class="nav-dropdown-header">
+              <div>
+                <small>YOUR BAG</small>
+                <h6>
+                  Shopping Cart
+                  <span>{{ cartCount() }}</span>
+                </h6>
+              </div>
+              <i class="bi bi-bag"></i>
+            </div>
+
+            @if (cartItems().length > 0) {
+              <div class="nav-dropdown-products">
+                @for (item of cartItems(); track item.name) {
+                  <div class="nav-dropdown-product">
+
+                    <img [src]="item.image" [alt]="item.name" />
+
+                    <div class="nav-dropdown-product-info">
+                      <strong>{{ item.name }}</strong>
+                      <small>Quantity: {{ item.quantity }}</small>
+                      <b>
+                        {{ formatPrice(item.price * item.quantity) }}
+                      </b>
+                    </div>
+
+                    <button
+                      type="button"
+                      class="nav-remove-btn"
+                      aria-label="Remove from cart"
+                      (click)="removeCartItem(item.name)"
+                    >
+                      <i class="bi bi-trash3"></i>
+                    </button>
+
+                  </div>
+                }
+              </div>
+
+              <div class="nav-cart-subtotal">
+                <span>Subtotal</span>
+                <strong>{{ formatPrice(cartSubtotal()) }}</strong>
+              </div>
+
+              <p class="nav-cart-note">
+                Shipping and taxes calculated at checkout.
+              </p>
+
+              <a class="nav-dropdown-cta" routerLink="/cart">
+                View cart and checkout
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            } @else {
+              <div class="nav-dropdown-empty">
+                <i class="bi bi-bag"></i>
+                <strong>Your bag is feeling light</strong>
+                <p>
+                  Discover your daily wellness essentials and add
+                  something you love.
+                </p>
+              </div>
+
+              <a class="nav-dropdown-cta" routerLink="/shop">
+                Explore products
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            }
+
+          </div>
+        </div>
+
+        <!-- ================= ACCOUNT DROPDOWN ================= -->
+        <div class="dropdown d-none d-lg-block">
+          <button
+            type="button"
+            class="icon-btn"
+            aria-label="Account options"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-person"></i>
+          </button>
+
+          <div class="dropdown-menu dropdown-menu-end nav-dropdown account-dropdown">
+
+            <div class="nav-dropdown-header">
+              <div>
+                <small>WELCOME TO OXYNIKA</small>
+                <h6>Choose your account</h6>
+              </div>
+              <i class="bi bi-person-circle"></i>
+            </div>
+
+            <p class="nav-account-intro">
+              Select the portal you want to access.
+            </p>
+
+            <a class="nav-account-option" routerLink="/login">
+
+              <span class="nav-account-icon">
+                <i class="bi bi-person"></i>
+              </span>
+
+              <span>
+                <strong>Personal Account</strong>
+                <small>Shop products and manage your orders.</small>
+              </span>
+
+              <i class="bi bi-arrow-up-right nav-account-arrow"></i>
+
+            </a>
+
+            <a class="nav-account-option" target="_blank" rel="noopener noreferrer" href="https://oxynika-business.vercel.app/">
+
+              <span class="nav-account-icon business">
+                <i class="bi bi-buildings"></i>
+              </span>
+
+              <span>
+                <strong>Business / Franchise</strong>
+                <small>Access your business portal.</small>
+              </span>
+
+              <i class="bi bi-arrow-up-right nav-account-arrow"></i>
+
+            </a>
+
+            <div class="nav-account-footer">
+              <i class="bi bi-shield-check"></i>
+              Choose the account that fits your needs.
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Mobile menu toggle -->
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#mobileMenu"
+          aria-controls="mobileMenu"
+          aria-label="Open navigation menu"
+        >
+          <i class="bi bi-list"></i>
+        </button>
+
+      </div>
+    </div>
+  </div>
 </nav>
 
 
-<!-- Mobile Offcanvas Menu -->
+<!-- ============================================
+     MOBILE OFFCANVAS SIDEBAR
+============================================ -->
 <div
   class="offcanvas offcanvas-end mobile-menu"
   tabindex="-1"
@@ -102,6 +290,7 @@
   aria-labelledby="mobileMenuLabel"
 >
   <div class="offcanvas-header">
+
     <a class="navbar-brand" routerLink="/" data-bs-dismiss="offcanvas">
       <img
         src="/images/logo/logo.png"
@@ -115,53 +304,242 @@
       data-bs-dismiss="offcanvas"
       aria-label="Close menu"
     ></button>
+
   </div>
 
   <div class="offcanvas-body">
+
+    <!-- Mobile navigation -->
     <ul class="navbar-nav mobile-nav">
       @for (item of navItems; track item.label) {
         <li class="nav-item">
-          @if (item.activeRoute) {
-            <a
-              class="nav-link"
-              [routerLink]="item.route"
-              [fragment]="item.fragment"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
-              data-bs-dismiss="offcanvas"
-            >
-              {{ item.label }}
-              <i class="bi bi-arrow-up-right"></i>
-            </a>
-          } @else {
-            <a
-              class="nav-link"
-              [routerLink]="item.route"
-              [fragment]="item.fragment"
-              data-bs-dismiss="offcanvas"
-            >
-              {{ item.label }}
-              <i class="bi bi-arrow-up-right"></i>
-            </a>
-          }
+
+          <a
+            class="nav-link"
+            [routerLink]="item.route"
+            [fragment]="item.fragment"
+            [routerLinkActive]="item.activeRoute ? 'active' : ''"
+            [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+            data-bs-dismiss="offcanvas"
+          >
+            {{ item.label }}
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+
         </li>
       }
     </ul>
 
+    <!-- Mobile sidebar footer -->
     <div class="mobile-menu-footer">
+
       <p>Discover your wellness journey.</p>
 
       <div class="mobile-social-links">
-        <button type="button" aria-label="Search">
+
+        <!-- Mobile search -->
+        <button
+          type="button"
+          aria-label="Search products"
+          routerLink="/shop"
+          data-bs-dismiss="offcanvas"
+        >
           <i class="bi bi-search"></i>
         </button>
-        <button type="button" aria-label="Wishlist">
+
+        <!-- Mobile wishlist -->
+        <button
+          type="button"
+          aria-label="Wishlist"
+          (click)="mobilePanel.set('wishlist')"
+          data-bs-dismiss="offcanvas"
+        >
           <i class="bi bi-heart"></i>
         </button>
-        <button type="button" aria-label="Account">
+
+        <!-- Mobile account -->
+        <button
+          type="button"
+          aria-label="Account options"
+          (click)="mobilePanel.set('account')"
+          data-bs-dismiss="offcanvas"
+        >
           <i class="bi bi-person"></i>
         </button>
+
       </div>
     </div>
+
   </div>
 </div>
+
+
+<!-- ============================================
+     MOBILE WISHLIST / ACCOUNT POPUP
+     IMPORTANT: OUTSIDE THE OFFCANVAS
+============================================ -->
+@if (mobilePanel() === 'wishlist' || mobilePanel() === 'account') {
+
+  <div
+    class="mobile-popup-backdrop"
+    (click)="mobilePanel.set(null)"
+  >
+
+    <section
+      class="mobile-action-popup"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="mobilePanel() === 'wishlist' ? 'My Wishlist' : 'Choose your account'"
+      (click)="$event.stopPropagation()"
+    >
+
+      <!-- MOBILE WISHLIST -->
+      @if (mobilePanel() === 'wishlist') {
+
+        <div class="mobile-popup-header">
+
+          <div>
+            <small>YOUR COLLECTION</small>
+            <h5>
+              My Wishlist
+              <span>{{ wishlistItems().length }}</span>
+            </h5>
+          </div>
+
+          <button
+            type="button"
+            (click)="mobilePanel.set(null)"
+            aria-label="Close wishlist"
+          >
+            <i class="bi bi-x-lg"></i>
+          </button>
+
+        </div>
+
+        @if (wishlistItems().length > 0) {
+
+          <div class="mobile-popup-items">
+
+            @for (item of wishlistItems(); track item.name) {
+
+              <div class="mobile-popup-product">
+
+                <img [src]="item.image" [alt]="item.name" />
+
+                <div class="mobile-popup-product-info">
+                  <strong>{{ item.name }}</strong>
+                  <small>{{ item.category }}</small>
+                  <b>{{ formatPrice(item.price) }}</b>
+                </div>
+
+                <button
+                  type="button"
+                  class="mobile-popup-remove"
+                  [attr.aria-label]="'Remove ' + item.name + ' from wishlist'"
+                  (click)="removeWishlistItem(item.name)"
+                >
+                  <i class="bi bi-heart-fill"></i>
+                </button>
+
+              </div>
+
+            }
+
+          </div>
+
+        } @else {
+
+          <div class="mobile-popup-empty">
+            <i class="bi bi-heart"></i>
+            <strong>Your wishlist is waiting</strong>
+            <p>Save your favourite wellness essentials here.</p>
+          </div>
+
+        }
+
+        <a
+          class="nav-dropdown-cta"
+          routerLink="/wishlist"
+          (click)="mobilePanel.set(null)"
+        >
+          View wishlist
+          <i class="bi bi-arrow-up-right"></i>
+        </a>
+
+      }
+
+
+      <!-- MOBILE ACCOUNT -->
+      @if (mobilePanel() === 'account') {
+
+        <div class="mobile-popup-header">
+
+          <div>
+            <small>WELCOME TO OXYNIKA</small>
+            <h5>Choose your account</h5>
+          </div>
+
+          <button
+            type="button"
+            (click)="mobilePanel.set(null)"
+            aria-label="Close account options"
+          >
+            <i class="bi bi-x-lg"></i>
+          </button>
+
+        </div>
+
+        <p class="nav-account-intro">
+          Select the portal you want to access.
+        </p>
+
+        <a
+          class="nav-account-option"
+          routerLink="/login"
+          (click)="mobilePanel.set(null)"
+        >
+
+          <span class="nav-account-icon">
+            <i class="bi bi-person"></i>
+          </span>
+
+          <span>
+            <strong>Personal Account</strong>
+            <small>Shop products and manage your orders.</small>
+          </span>
+
+          <i class="bi bi-arrow-up-right nav-account-arrow"></i>
+
+        </a>
+
+        <a
+          class="nav-account-option"
+          target="_blank" rel="noopener noreferrer" href="https://oxynika-business.vercel.app/"
+          (click)="mobilePanel.set(null)"
+        >
+
+          <span class="nav-account-icon business">
+            <i class="bi bi-buildings"></i>
+          </span>
+
+          <span>
+            <strong>Business / Franchise</strong>
+            <small>Access your business portal.</small>
+          </span>
+
+          <i class="bi bi-arrow-up-right nav-account-arrow"></i>
+
+        </a>
+
+        <div class="nav-account-footer">
+          <i class="bi bi-shield-check"></i>
+          Choose the account that fits your needs.
+        </div>
+
+      }
+
+    </section>
+
+  </div>
+
+}

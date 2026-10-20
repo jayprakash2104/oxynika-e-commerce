@@ -22,6 +22,11 @@ export const routes: Routes = [
         title: 'Contact | Oxynika Wellness'
     },
     {
+        path: 'faq',
+        loadComponent: () => import('./pages/faq/faq').then(m => m.Faq),
+        title: 'FAQ | Oxynika Wellness'
+    },
+    {
         path: '**',
         redirectTo: ''
     }

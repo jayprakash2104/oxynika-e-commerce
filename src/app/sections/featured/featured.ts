@@ -36,7 +36,7 @@ export class Featured implements OnDestroy {
           id: 1,
           badge: 'Best Seller',
           rating: 4.9,
-          image: '/images/products/p1.png',
+          image: '/images/products/Oxynika-Shilajit-Resin.webp',
           name: 'Pure Himalayan Shilajit Resin',
           price: 899,
           originalPrice: 1199,
@@ -44,20 +44,10 @@ export class Featured implements OnDestroy {
         },
         {
           id: 2,
-          badge: 'New',
-          rating: 4.8,
-          image: '/images/products/p2.png',
-          name: 'Shilajit Capsules',
-          price: 799,
-          originalPrice: 999,
-          category: 'shilajit',
-        },
-        {
-          id: 3,
           badge: '',
           rating: 4.9,
-          image: '/images/products/p3.png',
-          name: 'Ashwagandha Gummies',
+          image: '/images/products/Oxynika-Shilajit-Gummies.webp',
+          name: 'Shilajit Gummies',
           price: 699,
           originalPrice: 899,
           category: 'shilajit',
@@ -102,11 +92,6 @@ export class Featured implements OnDestroy {
     {
       id: 3,
       title: 'Skin Care',
-      products: [],
-    },
-    {
-      id: 4,
-      title: 'Hair Care',
       products: [],
     },
   ];
